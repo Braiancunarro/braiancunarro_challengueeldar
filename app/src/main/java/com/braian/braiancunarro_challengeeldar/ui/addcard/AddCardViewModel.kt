@@ -8,6 +8,7 @@ import com.braian.braiancunarro_challengeeldar.R
 import com.braian.braiancunarro_challengeeldar.data.creditCardDto.CardModel
 import com.braian.braiancunarro_challengeeldar.data.local.CreditCardDao
 import com.braian.braiancunarro_challengeeldar.data.local.CreditCardEntity
+import com.braian.braiancunarro_challengeeldar.utils.EncryptionUtils
 import kotlinx.coroutines.launch
 
 class AddCardViewModel(private val creditCardDao: CreditCardDao) : ViewModel() {
@@ -71,12 +72,12 @@ class AddCardViewModel(private val creditCardDao: CreditCardDao) : ViewModel() {
     fun onAddCardButtonClick() {
         // Crear un nuevo objeto CardModel con los datos ingresados
         val newCard = CardModel(
-            cardHolderName.value.orEmpty(),
-            cardNumber.value.orEmpty(),
-            expirationMonth.value.orEmpty(),
-            expirationYear.value.orEmpty(),
-            securityCode.value.orEmpty(),
-            brand.value.orEmpty()
+            EncryptionUtils().encrypt(cardHolderName.value.orEmpty()),
+            EncryptionUtils().encrypt(cardNumber.value.orEmpty()),
+                EncryptionUtils().encrypt(expirationMonth.value.orEmpty()),
+                    EncryptionUtils().encrypt(expirationYear.value.orEmpty()),
+                        EncryptionUtils().encrypt(securityCode.value.orEmpty()),
+                            EncryptionUtils().encrypt(brand.value.orEmpty())
         )
 
         // Agregar la nueva tarjeta a la lista

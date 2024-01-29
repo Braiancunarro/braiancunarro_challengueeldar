@@ -14,7 +14,9 @@ import com.braian.braiancunarro_challengeeldar.data.repository.QRCodeService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import okhttp3.ResponseBody
 import retrofit2.Response
+import java.io.InputStream
 
 class QRCodeViewModel(private val qrCodeService: QRCodeService) : ViewModel() {
     private val _qrCodeBitmapLiveData = MutableLiveData<Bitmap>()
@@ -25,26 +27,29 @@ class QRCodeViewModel(private val qrCodeService: QRCodeService) : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val request = QRCodeRequest(content, width, height)
-                val response: Response<QRCodeResponse> = qrCodeService.generateQRCode(request)
+                val response: Response<ResponseBody> = qrCodeService.generateQRCode(request)
 
                 if (response.isSuccessful) {
-                    val byteArray = response.body()?.image!!.toByteArray()
-                    val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray?.size ?: 0)
+                    // Obtener el InputStream de la respuesta
+                    val inputStream: InputStream = response.body()!!.byteStream()
 
+                    // Decodificar el InputStream a Bitmap
+                    val bitmap = BitmapFactory.decodeStream(inputStream)
+
+                    // Publicar en el hilo principal
                     withContext(Dispatchers.Main) {
                         _qrCodeBitmapLiveData.value = bitmap
                     }
                 } else {
                     // Manejar errores según el código de respuesta HTTP
                     // response.code(), response.message()
-                    Log.e("QRCodeViewModel", "Error en la llamada al servicio: ${response.code()}")
                 }
             } catch (e: Exception) {
                 // Manejar errores, por ejemplo, mostrar un mensaje de error
                 e.printStackTrace()
-                Log.e("QRCodeViewModel", "Error en la llamada al servicio: ${e.message}")
             }
         }
     }
+
 }
 
