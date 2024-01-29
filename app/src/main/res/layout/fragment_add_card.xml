@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.braian.braiancunarro_challengeeldar.adapter.BindingAdaptersKt" />
         <variable
             name="viewModel"
             type="com.braian.braiancunarro_challengeeldar.ui.addcard.AddCardViewModel" />
@@ -34,7 +33,6 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="4dp"
-                app:srcCompat="@{viewModel.exampleImageCard}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvCardHolderName"
                 app:layout_constraintTop_toTopOf="parent"

@@ -41,6 +41,9 @@ class HomeFragment : Fragment(), OnItemClickListener, OnHeaderClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.btnPayWithQR.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_qrGeneratorFragment)
+        }
         return binding.root
     }
 
