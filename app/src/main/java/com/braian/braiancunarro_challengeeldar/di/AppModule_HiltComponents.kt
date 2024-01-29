@@ -1,6 +1,6 @@
 package com.braian.braiancunarro_challengeeldar.di
 
-import com.braian.braiancunarro_challengeeldar.domain.LoginUseCase
+import com.braian.braiancunarro_challengeeldar.domain.usecase.LoginUseCase
 import com.braian.braiancunarro_challengeeldar.ui.login.LoginViewModel
 import dagger.Module
 import dagger.Provides

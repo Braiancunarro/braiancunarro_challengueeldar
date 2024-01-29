@@ -3,75 +3,101 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="com.braian.braiancunarro_challengeeldar.adapter.BindingAdaptersKt" />
         <variable
             name="viewModel"
             type="com.braian.braiancunarro_challengeeldar.ui.addcard.AddCardViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.addcard.AddCardFragment">
 
-        <!-- Tarjeta de Ejemplo en la parte superior -->
-        <LinearLayout
-            android:id="@+id/llExampleCard"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/exampleCard"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:background="@drawable/card_background"
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp">
 
-            <!-- Imagen de la Marca de la Tarjeta -->
+            <!-- Tipo de Tarjeta (Visa, Mastercard, American Express) -->
             <ImageView
-                android:id="@+id/ivExampleCardBrand"
+                android:id="@+id/ivCardBrand"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/visa" />
+                android:layout_gravity="end"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="4dp"
+                app:srcCompat="@{viewModel.exampleImageCard}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvCardHolderName"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="visible" />
+            />
 
             <!-- Número de Tarjeta -->
-            <TextView
-                android:id="@+id/tvExampleCardNumber"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:letterSpacing="0.1"
-                android:text="**** **** **** 1234"
-                android:textSize="18sp" />
 
             <!-- Fecha de Vencimiento y Nombre del Titular -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tvCardNumber"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="16dp"
+                android:letterSpacing="0.1"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivCardBrand"
+                android:text="@{viewModel.exampleCardNumber}"/>
 
-                <!-- Fecha de Vencimiento -->
-                <TextView
-                    android:id="@+id/tvExampleExpirationDate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="8dp"
-                    android:layout_weight="1"
-                    android:text="MM/YY"
-                    android:textSize="14sp" />
 
-                <!-- Nombre del Titular -->
-                <TextView
-                    android:id="@+id/tvExampleCardHolderName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="TITULAR DE LA TARJETA"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </LinearLayout>
+            <!-- Fecha de Vencimiento -->
+            <TextView
+                android:id="@+id/tvExpirationDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCardNumber"
+                android:text="@{viewModel.exampleExpirationDate}"/>
+
+            <!-- Nombre del Titular -->
+            <TextView
+                android:id="@+id/tvCardHolderName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvCardNumber"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{viewModel.exampleHolderName}" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Formulario para agregar una nueva tarjeta -->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardForm"
             android:layout_width="match_parent"
             android:layout_height="449dp"
             android:layout_gravity="bottom"
-            android:padding="16dp">
+            android:padding="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exampleCard"
+            android:layout_marginTop="20dp">
 
             <!-- Nombre del Titular -->
             <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +115,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombre del Titular"
-                    android:text="@={viewModel.cardHolderName}" />
+                    android:maxLines="1"
+                    android:text="@{viewModel.cardHolderName}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Número de Tarjeta -->
@@ -97,6 +124,7 @@
                 android:id="@+id/tilCardNumber"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
+                android:maxLines="1"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +136,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Número de Tarjeta"
-                    android:text="@={viewModel.cardNumber}" />
+                    android:text="@{viewModel.cardNumber}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Fecha de Vencimiento -->
@@ -126,14 +154,15 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:maxLines="1">
 
                     <AutoCompleteTextView
                         android:id="@+id/actvExpirationMonth"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="MM"
-                        android:text="@={viewModel.expirationMonth}" />
+                        android:text="@{viewModel.expirationMonth}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -149,7 +178,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="YY"
-                        android:text="@={viewModel.expirationYear}" />
+                        android:maxLines="1"
+                        android:text="@{viewModel.expirationYear}" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -169,7 +199,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Código de Seguridad"
-                    android:text="@={viewModel.securityCode}" />
+                    android:maxLines="1"
+                    android:text="@{viewModel.securityCode}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Botón para agregar tarjeta -->
@@ -183,7 +214,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tilSecurityCode" />
+                app:layout_constraintTop_toBottomOf="@+id/tilSecurityCode"
+                android:onClick="onAddCardButtonClick"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

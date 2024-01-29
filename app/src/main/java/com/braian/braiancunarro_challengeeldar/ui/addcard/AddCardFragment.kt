@@ -1,25 +1,27 @@
+// AddCardFragment.kt
 package com.braian.braiancunarro_challengeeldar.ui.addcard
 
-import AddCardViewModel
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.braian.braiancunarro_challengeeldar.data.local.AppDatabase
+import com.braian.braiancunarro_challengeeldar.data.local.CreditCardDao
 import com.braian.braiancunarro_challengeeldar.databinding.FragmentAddCardBinding
 
 class AddCardFragment : Fragment() {
 
-    private val viewModel: AddCardViewModel by viewModels()
     private lateinit var binding: FragmentAddCardBinding
+    private lateinit var viewModel: AddCardViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddCardBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -27,50 +29,115 @@ class AddCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observar los cambios en los datos y actualizar la interfaz de usuario
-        viewModel.cardHolderName.observe(viewLifecycleOwner, Observer { name ->
-            binding.etCardHolderName.setText(name)
+        // Inicializar el ViewModel
+        val appDatabase = AppDatabase.getDatabase(requireContext())
+        val creditCardDao = appDatabase.creditCardDao()
+        val viewModelFactory = AddCardViewModelFactory(creditCardDao)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(AddCardViewModel::class.java)
+        // Establecer el ciclo de vida para el DataBinding
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        // Establecer el ViewModel en el DataBinding
+        binding.viewModel = viewModel
+
+        // Configurar el TextWatcher para cardHolderName
+        binding.etCardHolderName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No es necesario implementar
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.cardHolderName.value = s?.toString() ?: ""
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // No es necesario implementar
+            }
         })
 
-        viewModel.cardNumber.observe(viewLifecycleOwner, Observer { number ->
-            binding.etCardNumber.setText(number)
+        // Configurar el TextWatcher para cardNumber
+        binding.etCardNumber.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No es necesario implementar
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.cardNumber.value = s?.toString() ?: ""
+                viewModel.exampleCardNumber.value = formatCardNumber(s?.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // No es necesario implementar
+            }
         })
 
-        viewModel.expirationMonth.observe(viewLifecycleOwner, Observer { month ->
-            binding.actvExpirationMonth.setText(month)
+
+        // Configurar el TextWatcher para securityCode
+        binding.etSecurityCode.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No es necesario implementar
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.securityCode.value = s?.toString() ?: ""
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // No es necesario implementar
+            }
         })
 
-        viewModel.expirationYear.observe(viewLifecycleOwner, Observer { year ->
-            binding.actvExpirationYear.setText(year)
+        // Configurar el TextWatcher para expirationMonth y expirationYear
+        binding.actvExpirationMonth.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No es necesario implementar
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.expirationMonth.value = s?.toString() ?: ""
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // No es necesario implementar
+            }
         })
 
-        viewModel.securityCode.observe(viewLifecycleOwner, Observer { code ->
-            binding.etSecurityCode.setText(code)
+        binding.actvExpirationYear.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No es necesario implementar
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                viewModel.expirationYear.value = s?.toString() ?: ""
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // No es necesario implementar
+            }
         })
 
-        viewModel.cardBrandImage.observe(viewLifecycleOwner, Observer { imageResource ->
-            binding.ivExampleCardBrand.setImageResource(imageResource)
-        })
-
-        // Configurar listeners para los campos de texto
-        binding.etCardHolderName.addTextChangedListener {
-            viewModel.setCardHolderName(it.toString())
+        // Configurar el ClickListener para el botón "Agregar Tarjeta"
+        binding.btnAddCard.setOnClickListener {
+            viewModel.onAddCardButtonClick()
+            // Aquí puedes manejar la lógica adicional después de agregar la tarjeta, si es necesario
         }
 
-        binding.etCardNumber.addTextChangedListener {
-            viewModel.setCardNumber(it.toString())
+        // Observar cambios en la lista de tarjetas
+        viewModel.cardListLiveData.observe(viewLifecycleOwner) { cardList ->
+            // Actualizar la interfaz de usuario con la nueva lista de tarjetas
+            // Puedes agregar lógica para mostrar las tarjetas en un RecyclerView aquí
+            // cardList contiene la lista actualizada de tarjetas
         }
+    }
 
-        binding.actvExpirationMonth.addTextChangedListener {
-            viewModel.setExpirationMonth(it.toString())
-        }
+    fun formatCardNumber(cardNumber: String?): String {
+        cardNumber?.let {
+            // Eliminar cualquier espacio en blanco y no números
+            val cleanCardNumber = it.replace("[^\\d]".toRegex(), "")
 
-        binding.actvExpirationYear.addTextChangedListener {
-            viewModel.setExpirationYear(it.toString())
+            // Dividir en secuencias de 4 caracteres
+            return cleanCardNumber.chunked(4).joinToString(" ")
         }
-
-        binding.etSecurityCode.addTextChangedListener {
-            viewModel.setSecurityCode(it.toString())
-        }
+        return ""
     }
 }

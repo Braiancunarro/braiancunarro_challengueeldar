@@ -1,6 +1,7 @@
-package com.braian.braiancunarro_challengeeldar.domain
+package com.braian.braiancunarro_challengeeldar.domain.usecase
 
 import com.braian.braiancunarro_challengeeldar.data.repository.LoginRepository
+import com.braian.braiancunarro_challengeeldar.domain.usecase.LoginUseCase
 
 class LoginUseCaseImpl(private val loginRepository: LoginRepository) : LoginUseCase {
 

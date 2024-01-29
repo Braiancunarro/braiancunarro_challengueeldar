@@ -1,17 +1,14 @@
 package com.braian.braiancunarro_challengeeldar.di
 
-import android.app.Application
-import androidx.lifecycle.ViewModelProvider
 import com.braian.braiancunarro_challengeeldar.data.api.ApiService
 import com.braian.braiancunarro_challengeeldar.data.repository.LoginRepository
 import com.braian.braiancunarro_challengeeldar.data.repository.LoginRepositoryImpl
-import com.braian.braiancunarro_challengeeldar.domain.LoginUseCase
-import com.braian.braiancunarro_challengeeldar.domain.LoginUseCaseImpl
+import com.braian.braiancunarro_challengeeldar.domain.usecase.LoginUseCase
+import com.braian.braiancunarro_challengeeldar.domain.usecase.LoginUseCaseImpl
 import com.braian.braiancunarro_challengeeldar.ui.login.LoginViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.internal.lifecycle.HiltViewModelFactory
 import javax.inject.Singleton
 
 @Module

@@ -1,13 +1,10 @@
 package com.braian.braiancunarro_challengeeldar.ui.login
 
-import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.braian.braiancunarro_challengeeldar.MainActivity
-import com.braian.braiancunarro_challengeeldar.domain.LoginUseCase
+import com.braian.braiancunarro_challengeeldar.domain.usecase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 
