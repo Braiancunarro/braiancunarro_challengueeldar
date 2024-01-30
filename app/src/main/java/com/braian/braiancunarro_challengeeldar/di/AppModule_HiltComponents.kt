@@ -8,5 +8,4 @@ import dagger.hilt.android.components.ActivityComponent
 @InstallIn(ActivityComponent::class)
 object AppModule_HiltComponents {
 
-
 }

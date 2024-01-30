@@ -1,6 +1,5 @@
 package com.braian.braiancunarro_challengeeldar.data.local
 
-// En el mismo paquete o en un paquete separado, según tu estructura
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room

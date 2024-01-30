@@ -1,7 +1,6 @@
 package com.braian.braiancunarro_challengeeldar.data.repository
 
 import com.braian.braiancunarro_challengeeldar.data.model.QRCodeRequest
-import com.braian.braiancunarro_challengeeldar.data.model.QRCodeResponse
 import com.braian.braiancunarro_challengeeldar.utils.Constants
 import okhttp3.ResponseBody
 import retrofit2.Response

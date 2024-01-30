@@ -13,5 +13,5 @@ data class CreditCardEntity(
     val expirationMonth: String,
     val expirationYear: String,
     val securityCode: String,
-    val brand:String
+    val brand: String
 )

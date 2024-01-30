@@ -7,7 +7,7 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
-    <!-- Sección de Tarjetas -->
+
     <TextView
         android:id="@+id/tvCardSectionTitle"
         android:layout_width="match_parent"
@@ -16,16 +16,15 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <!-- Puedes usar un RecyclerView para mostrar las tarjetas -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvCardSectionTitle"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal" />
 
-    <!-- Card de Saldo -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardBalance"
         android:layout_width="match_parent"
@@ -52,14 +51,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="$1000.00"
-                android:textSize="24sp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="24sp" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- Botones -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llButtons"
         android:layout_width="match_parent"
@@ -69,12 +67,12 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddCard"
+            android:id="@+id/btnaddMoney"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Agregar tarjeta"
+            android:text="Ingresa Dinero"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,23 +88,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnOther1"
+            android:id="@+id/btntransf"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Otro Botón 1"
+            android:text="Transferir Dinero"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btnAddCard"
             app:layout_constraintTop_toBottomOf="@+id/btnPayWithQR" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnOther2"
+            android:id="@+id/btnmiCvu"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Otro Botón 2"
+            android:text="MI CVU"
             app:layout_constraintEnd_toEndOf="@+id/btnAddCard"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnAddCard" />

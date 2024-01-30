@@ -11,12 +11,9 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val creditCardDao: CreditCardDao) : ViewModel() {
 
-    // LiveData para la lista de tarjetas
     val cardListLiveData: LiveData<List<CreditCardEntity>> = creditCardDao.getAllCreditCards()
 
-    // Método para obtener la lista de tarjetas sincrónicamente
     fun getCardList() : LiveData<List<CreditCardEntity>>  {
-        // Utilizar un bloque de runBlocking para esperar la respuesta de la base de datos
         return runBlocking {
             creditCardDao.getAllCreditCards()
         }

@@ -15,7 +15,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideApiService(): ApiService {
-        return ApiService()// Reemplaza esto con la instancia real de tu servicio API
+        return ApiService()
     }
 
     @Provides
@@ -23,7 +23,6 @@ object AppModule {
     fun provideLoginRepository(apiService: ApiService): LoginRepository {
         return LoginRepositoryImpl()
     }
-
 
 
 }

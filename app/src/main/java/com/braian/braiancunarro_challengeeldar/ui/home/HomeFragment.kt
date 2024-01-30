@@ -7,26 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.braian.braiancunarro_challengeeldar.R
-import com.braian.braiancunarro_challengeeldar.adapter.CardAdapter
-import com.braian.braiancunarro_challengeeldar.adapter.OnHeaderClickListener
-import com.braian.braiancunarro_challengeeldar.adapter.OnItemClickListener
-import com.braian.braiancunarro_challengeeldar.databinding.FragmentHomeBinding
-import dagger.hilt.android.AndroidEntryPoint
-import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.InvalidationTracker
+import com.braian.braiancunarro_challengeeldar.R
+import com.braian.braiancunarro_challengeeldar.adapter.CardAdapter
 import com.braian.braiancunarro_challengeeldar.adapter.MarginItemDecoration
-import com.braian.braiancunarro_challengeeldar.data.creditCardDto.CreditCard
+import com.braian.braiancunarro_challengeeldar.adapter.OnHeaderClickListener
+import com.braian.braiancunarro_challengeeldar.adapter.OnItemClickListener
 import com.braian.braiancunarro_challengeeldar.data.local.AppDatabase
 import com.braian.braiancunarro_challengeeldar.data.local.CreditCardEntity
-import com.braian.braiancunarro_challengeeldar.databinding.FragmentAddCardBinding
-import com.braian.braiancunarro_challengeeldar.ui.addcard.AddCardViewModel
-import com.braian.braiancunarro_challengeeldar.ui.addcard.AddCardViewModelFactory
+import com.braian.braiancunarro_challengeeldar.databinding.FragmentHomeBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
@@ -44,14 +37,22 @@ class HomeFragment : Fragment(), OnItemClickListener, OnHeaderClickListener {
         binding.btnPayWithQR.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_qrGeneratorFragment)
         }
+
+        binding.btnaddMoney.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
+        }
+        binding.btnmiCvu.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
+        }
+        binding.btntransf.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupRecyclerView()
         observeCardList()
-
-
     }
 
     private fun setupRecyclerView() {
@@ -97,20 +98,16 @@ class HomeFragment : Fragment(), OnItemClickListener, OnHeaderClickListener {
         homeViewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
 
         homeViewModel.cardListLiveData.observe(viewLifecycleOwner, Observer { cardList ->
-                // Verifica si la lista está vacía antes de acceder a un elemento
-                if (cardList.isNotEmpty()) {
-                    val firstCard = cardList[0]
-                    cardAdapter.submitList(cardList)
-                    // Manejar la tarjeta, por ejemplo, mostrar información en el log
-                    Log.d("HomeFragment", "First card: $firstCard")
-                } else {
-                    // La lista está vacía, maneja este caso si es necesario
-                    Log.d("HomeFragment", "La lista de tarjetas está vacía.")
-                }
+            if (cardList.isNotEmpty()) {
+                val firstCard = cardList[0]
+                cardAdapter.submitList(cardList)
+                Log.d("HomeFragment", "First card: $firstCard")
+            } else {
+                Log.d("HomeFragment", "La lista de tarjetas está vacía.")
+            }
         })
     }
 
-    // Implementa las funciones de las interfaces OnItemClickListener y OnHeaderClickListener
     override fun onItemClick(position: Int) {
         Toast.makeText(requireContext(), "Clic en la tarjeta $position", Toast.LENGTH_SHORT).show()
     }

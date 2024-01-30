@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.braian.braiancunarro_challengeeldar.R
-import com.braian.braiancunarro_challengeeldar.data.creditCardDto.CreditCard
 import com.braian.braiancunarro_challengeeldar.data.local.CreditCardEntity
 
 class CardAdapter(
@@ -29,7 +28,7 @@ class CardAdapter(
 
         init {
             itemView.setOnClickListener {
-                itemClickListener.onItemClick(adapterPosition - 1) // Restar 1 para ajustar la posición
+                itemClickListener.onItemClick(adapterPosition - 1)
             }
         }
     }
@@ -38,7 +37,7 @@ class CardAdapter(
 
         init {
             itemView.setOnClickListener {
-                headerClickListener.onHeaderClick(adapterPosition - 1) // Restar 1 para ajustar la posición
+                headerClickListener.onHeaderClick(adapterPosition - 1)
             }
         }
     }
@@ -50,11 +49,13 @@ class CardAdapter(
                     .inflate(R.layout.item_add_card_header, parent, false)
                 HeaderViewHolder(view)
             }
+
             VIEW_TYPE_CARD -> {
                 val view =
                     LayoutInflater.from(parent.context).inflate(R.layout.card_item, parent, false)
                 CardViewHolder(view)
             }
+
             else -> throw IllegalArgumentException("View type not supported")
         }
     }
@@ -62,18 +63,18 @@ class CardAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is CardViewHolder -> {
-                val card = cardList[position - 1] // Restar 1 para ajustar la posición
+                val card = cardList[position - 1]
                 holder.brandImage.setImageResource(getBrandImageResource(card.brand))
                 holder.clBackground.setBackgroundResource(getBrandBackground(card.brand))
                 holder.cardNumber.text = card.cardNumber
-                holder.expirationDate.text = card.expirationMonth.plus("/").plus(card.expirationYear)
+                holder.expirationDate.text =
+                    card.expirationMonth.plus("/").plus(card.expirationYear)
                 holder.cardHolderName.text = card.cardHolderName
             }
         }
     }
 
     override fun getItemCount(): Int {
-        // Agregar 1 al recuento total para incluir el encabezado
         return cardList.size + 1
     }
 
@@ -87,34 +88,32 @@ class CardAdapter(
 
     fun submitList(newList: List<CreditCardEntity>) {
         cardList = newList
-        notifyDataSetChanged() // Notifica al RecyclerView que los datos han cambiado
+        notifyDataSetChanged()
     }
-
 
     private fun getBrandImageResource(brand: String): Int {
-        // Mapea la marca de la tarjeta a la correspondiente imagen de recursos
         return when (brand) {
-            "Visa" -> {R.drawable.visa}
-            "Mastercard" ->{ R.drawable.mastercard}
-            "American Express" -> {R.drawable.americanexpress}
-            else ->{R.drawable.visa }// Imagen predeterminada o maneja otros casos
+            "Visa" -> R.drawable.visa
+            "Mastercard" -> R.drawable.mastercard
+            "American Express" -> R.drawable.americanexpress
+            else -> R.drawable.visa
         }
     }
+
     private fun getBrandBackground(brand: String): Int {
-        // Mapea la marca de la tarjeta a la correspondiente imagen de recursos
         return when (brand) {
-            "Visa" -> {R.drawable.card_background_visa}
-            "Mastercard" ->{ R.drawable.card_background_master}
-            "American Express" -> {R.drawable.card_background_american}
-            else ->{R.drawable.card_background_visa}// Imagen predeterminada o maneja otros casos
+            "Visa" -> R.drawable.card_background_visa
+            "Mastercard" -> R.drawable.card_background_master
+            "American Express" -> R.drawable.card_background_american
+            else -> R.drawable.card_background_visa
         }
     }
 }
-
 
 interface OnItemClickListener {
     fun onItemClick(position: Int)
 }
+
 interface OnHeaderClickListener {
     fun onHeaderClick(position: Int)
 }
