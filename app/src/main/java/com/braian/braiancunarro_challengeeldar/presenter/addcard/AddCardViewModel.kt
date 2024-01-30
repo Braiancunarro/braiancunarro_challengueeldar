@@ -1,4 +1,4 @@
-package com.braian.braiancunarro_challengeeldar.ui.addcard
+package com.braian.braiancunarro_challengeeldar.presenter.addcard
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,6 @@ import com.braian.braiancunarro_challengeeldar.R
 import com.braian.braiancunarro_challengeeldar.data.creditCardDto.CardModel
 import com.braian.braiancunarro_challengeeldar.data.local.CreditCardDao
 import com.braian.braiancunarro_challengeeldar.data.local.CreditCardEntity
-import com.braian.braiancunarro_challengeeldar.utils.EncryptionUtils
 import kotlinx.coroutines.launch
 
 class AddCardViewModel(private val creditCardDao: CreditCardDao) : ViewModel() {
@@ -65,12 +64,12 @@ class AddCardViewModel(private val creditCardDao: CreditCardDao) : ViewModel() {
 
     fun onAddCardButtonClick() {
         val newCard = CardModel(
-            EncryptionUtils().encrypt(cardHolderName.value.orEmpty()),
-            EncryptionUtils().encrypt(cardNumber.value.orEmpty()),
-            EncryptionUtils().encrypt(expirationMonth.value.orEmpty()),
-            EncryptionUtils().encrypt(expirationYear.value.orEmpty()),
-            EncryptionUtils().encrypt(securityCode.value.orEmpty()),
-            EncryptionUtils().encrypt(brand.value.orEmpty())
+            cardHolderName.value.orEmpty(),
+            cardNumber.value.orEmpty(),
+           expirationMonth.value.orEmpty(),
+            expirationYear.value.orEmpty(),
+           securityCode.value.orEmpty(),
+            brand.value.orEmpty()
         )
 
         cardList.add(newCard)

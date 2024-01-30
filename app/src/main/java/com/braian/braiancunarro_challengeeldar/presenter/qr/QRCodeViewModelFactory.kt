@@ -1,4 +1,4 @@
-package com.braian.braiancunarro_challengeeldar.ui.qr
+package com.braian.braiancunarro_challengeeldar.presenter.qr
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

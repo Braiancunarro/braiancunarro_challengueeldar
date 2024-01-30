@@ -6,13 +6,13 @@
 
         <variable
             name="viewModel"
-            type="com.braian.braiancunarro_challengeeldar.ui.addcard.AddCardViewModel" />
+            type="com.braian.braiancunarro_challengeeldar.presenter.addcard.AddCardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.addcard.AddCardFragment">
+        tools:context=".presenter.addcard.AddCardFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/exampleCard"

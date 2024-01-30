@@ -1,4 +1,4 @@
-package com.braian.braiancunarro_challengeeldar.ui.addcard
+package com.braian.braiancunarro_challengeeldar.presenter.addcard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

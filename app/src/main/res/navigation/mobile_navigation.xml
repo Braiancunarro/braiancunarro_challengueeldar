@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.braian.braiancunarro_challengeeldar.ui.home.HomeFragment"
+        android:name="com.braian.braiancunarro_challengeeldar.presenter.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -21,11 +21,14 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_navigation_home_to_paywithnfc"
+            app:destination="@id/paywithnfc" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.braian.braiancunarro_challengeeldar.ui.dashboard.DashboardFragment"
+        android:name="com.braian.braiancunarro_challengeeldar.presenter.dashboard.EmptyScreenFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
@@ -36,12 +39,16 @@
         tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/addCardFragment"
-        android:name="com.braian.braiancunarro_challengeeldar.ui.addcard.AddCardFragment"
+        android:name="com.braian.braiancunarro_challengeeldar.presenter.addcard.AddCardFragment"
         android:label="fragment_add_card"
         tools:layout="@layout/fragment_add_card" />
     <fragment
         android:id="@+id/qrGeneratorFragment"
-        android:name="com.braian.braiancunarro_challengeeldar.ui.qr.QrGeneratorFragment"
+        android:name="com.braian.braiancunarro_challengeeldar.presenter.qr.QrGeneratorFragment"
         android:label="fragment_qr_generator"
         tools:layout="@layout/fragment_qr_generator" />
+    <fragment
+        android:id="@+id/paywithnfc"
+        android:name="com.braian.braiancunarro_challengeeldar.presenter.paywithnfc.Paywithnfc"
+        android:label="Paywithnfc" />
 </navigation>

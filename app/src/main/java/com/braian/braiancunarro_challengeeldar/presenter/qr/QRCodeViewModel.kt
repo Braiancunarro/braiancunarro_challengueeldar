@@ -1,4 +1,4 @@
-package com.braian.braiancunarro_challengeeldar.ui.qr
+package com.braian.braiancunarro_challengeeldar.presenter.qr
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

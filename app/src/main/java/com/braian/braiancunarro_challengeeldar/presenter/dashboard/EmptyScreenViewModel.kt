@@ -1,4 +1,4 @@
-package com.braian.braiancunarro_challengeeldar.ui.dashboard
+package com.braian.braiancunarro_challengeeldar.presenter.dashboard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

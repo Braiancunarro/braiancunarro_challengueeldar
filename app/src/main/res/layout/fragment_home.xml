@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo"
     android:padding="16dp"
     tools:context=".MainActivity">
 
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/eldar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/tvCardSectionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/logo"
+        android:layout_marginTop="8dp"
         android:text="Tus Tarjetas"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo"/>
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -23,7 +39,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvCardSectionTitle"
         android:layout_marginTop="8dp"
-        android:orientation="horizontal" />
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCardSectionTitle"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardBalance"
@@ -31,7 +50,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/rvCards"
         android:layout_marginTop="16dp"
-        app:cardCornerRadius="8dp">
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvCards">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,7 +86,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/cardBalance"
         android:layout_marginTop="16dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardBalance">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnaddMoney"
@@ -74,7 +99,10 @@
             android:layout_weight="1"
             android:text="Ingresa Dinero"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPayWithQR"
@@ -84,8 +112,11 @@
             android:layout_weight="1"
             android:text="Pagar con QR"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnAddCard"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/btnaddMoney"
+            app:layout_constraintTop_toTopOf="parent"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btntransf"
@@ -95,20 +126,26 @@
             android:layout_weight="1"
             android:text="Transferir Dinero"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnAddCard"
-            app:layout_constraintTop_toBottomOf="@+id/btnPayWithQR" />
+            app:layout_constraintStart_toEndOf="@+id/btnaddMoney"
+            app:layout_constraintTop_toBottomOf="@+id/btnPayWithQR"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnmiCvu"
+            android:id="@+id/btnpagoNFC"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="MI CVU"
-            app:layout_constraintEnd_toEndOf="@+id/btnAddCard"
+            android:backgroundTint="@color/black"
+            android:text="Pagar con NFC"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/btntransf"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddCard" />
+            app:layout_constraintTop_toBottomOf="@+id/btnaddMoney" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

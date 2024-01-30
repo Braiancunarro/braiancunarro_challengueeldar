@@ -1,4 +1,4 @@
-package com.braian.braiancunarro_challengeeldar.ui.home
+package com.braian.braiancunarro_challengeeldar.presenter.home
 
 import android.os.Bundle
 import android.util.Log
@@ -41,8 +41,8 @@ class HomeFragment : Fragment(), OnItemClickListener, OnHeaderClickListener {
         binding.btnaddMoney.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
         }
-        binding.btnmiCvu.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
+        binding.btnpagoNFC.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_paywithnfc)
         }
         binding.btntransf.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)

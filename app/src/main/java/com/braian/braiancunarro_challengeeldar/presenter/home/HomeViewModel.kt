@@ -1,4 +1,4 @@
-package com.braian.braiancunarro_challengeeldar.ui.home
+package com.braian.braiancunarro_challengeeldar.presenter.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

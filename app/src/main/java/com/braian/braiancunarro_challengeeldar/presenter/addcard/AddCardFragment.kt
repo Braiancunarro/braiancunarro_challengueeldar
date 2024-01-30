@@ -1,4 +1,4 @@
-package com.braian.braiancunarro_challengeeldar.ui.addcard
+package com.braian.braiancunarro_challengeeldar.presenter.addcard
 
 import android.os.Bundle
 import android.text.Editable
