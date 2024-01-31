@@ -1,6 +1,6 @@
 package com.braian.braiancunarro_challengeeldar.di
 
-import com.braian.braiancunarro_challengeeldar.App
+import com.braian.braiancunarro_challengeeldar.app.App
 import dagger.Component
 import javax.inject.Singleton
 

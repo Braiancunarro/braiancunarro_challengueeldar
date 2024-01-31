@@ -33,11 +33,6 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.braian.braiancunarro_challengeeldar.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-    <fragment
         android:id="@+id/addCardFragment"
         android:name="com.braian.braiancunarro_challengeeldar.presenter.addcard.AddCardFragment"
         android:label="fragment_add_card"

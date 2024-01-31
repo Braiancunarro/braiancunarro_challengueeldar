@@ -1,4 +1,4 @@
-package com.braian.braiancunarro_challengeeldar
+package com.braian.braiancunarro_challengeeldar.app
 
 import android.app.Application
 import androidx.room.Room
@@ -15,6 +15,5 @@ class App : Application() {
             applicationContext,
             AppDatabase::class.java, "my-database"
         ).fallbackToDestructiveMigration().build()
-
     }
 }

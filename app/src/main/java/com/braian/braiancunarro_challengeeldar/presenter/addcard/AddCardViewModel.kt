@@ -12,6 +12,8 @@ import kotlinx.coroutines.launch
 
 class AddCardViewModel(private val creditCardDao: CreditCardDao) : ViewModel() {
 
+
+
     private val cardList = mutableListOf<CardModel>()
 
     val cardHolderName = MediatorLiveData<String>()
@@ -20,6 +22,7 @@ class AddCardViewModel(private val creditCardDao: CreditCardDao) : ViewModel() {
     val expirationYear = MutableLiveData<String>()
     val securityCode = MutableLiveData<String>()
     val brand = MutableLiveData<String>()
+
     val exampleHolderName = MutableLiveData<String>().apply {
         value = "TITULAR DE LA TARJETA"
     }
@@ -35,6 +38,7 @@ class AddCardViewModel(private val creditCardDao: CreditCardDao) : ViewModel() {
 
     private val _cardListLiveData = MutableLiveData<List<CardModel>>()
     val cardListLiveData: MutableLiveData<List<CardModel>> = _cardListLiveData
+
 
     init {
         cardHolderName.addSource(cardHolderName) { newValue ->
@@ -70,6 +74,7 @@ class AddCardViewModel(private val creditCardDao: CreditCardDao) : ViewModel() {
             expirationYear.value.orEmpty(),
            securityCode.value.orEmpty(),
             brand.value.orEmpty()
+
         )
 
         cardList.add(newCard)

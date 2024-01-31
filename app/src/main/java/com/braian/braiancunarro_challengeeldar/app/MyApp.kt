@@ -1,4 +1,4 @@
-package com.braian.braiancunarro_challengeeldar
+package com.braian.braiancunarro_challengeeldar.app
 
 import com.braian.braiancunarro_challengeeldar.data.local.AppDatabase
 
